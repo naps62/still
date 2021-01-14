@@ -10,7 +10,9 @@ defmodule Still.Compiler.ViewHelpers do
         ViewHelpers.LinkToCSS,
         ViewHelpers.LinkToJS,
         ViewHelpers.ContentTag,
-        ViewHelpers.ResponsiveImage
+        ViewHelpers.ResponsiveImage,
+        ViewHelpers.SafeHTML,
+        ViewHelpers.Truncate
       }
 
       alias __MODULE__
@@ -28,6 +30,7 @@ defmodule Still.Compiler.ViewHelpers do
       def include(file, metadata, opts) do
         with pid when not is_nil(pid) <- Incremental.Registry.get_or_create_file_process(file),
              subscriber <- include_subscriber(opts),
+             metadata <- Map.put(metadata, :parent, subscriber),
              %SourceFile{content: content} <- Incremental.Node.render(pid, metadata, subscriber) do
           if subscriber do
             Incremental.Node.add_subscription(self(), file)
@@ -75,6 +78,20 @@ defmodule Still.Compiler.ViewHelpers do
 
       def link(content, opts) do
         Link.render(content, @env, opts)
+      end
+
+      def safe_html(content) do
+        SafeHTML.render(content)
+      end
+
+      def truncate(str, opts \\ []) do
+        truncated = Truncate.render(str, opts)
+
+        if opts[:escape] do
+          safe_html(truncated)
+        else
+          truncated
+        end
       end
 
       defdelegate link_to_css(path, opts \\ []), to: LinkToCSS, as: :render

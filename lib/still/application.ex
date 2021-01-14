@@ -8,7 +8,7 @@ defmodule Still.Application do
     # file is rendered.
     Code.compiler_options(ignore_module_conflict: true)
 
-    children = base_children() ++ server_children()
+    children = base_children() ++ server_children() ++ profiler_children()
     opts = [strategy: :one_for_one, name: Still.Supervisor]
 
     if server?() do
@@ -37,6 +37,14 @@ defmodule Still.Application do
     end
   end
 
+  defp profiler_children do
+    if profiler?() do
+      [Still.Profiler]
+    else
+      []
+    end
+  end
+
   defp cowboy_dispatch do
     [
       {:_,
@@ -54,5 +62,9 @@ defmodule Still.Application do
 
   defp server? do
     Application.get_env(:still, :server, false)
+  end
+
+  defp profiler? do
+    Application.get_env(:still, :profiler, false)
   end
 end
