@@ -114,9 +114,13 @@ defmodule Still.Preprocessor do
 
       def set_extension(file) do
         if Kernel.function_exported?(__MODULE__, :extension, 1) do
-          %{file | extension: extension(file)}
+          IO.puts("1")
+          result = %{file | extension: extension(file)} |> IO.inspect(label: "if")
+          IO.puts("2")
+          result
         else
-          file
+          IO.puts("3")
+          file |> IO.inspect(label: "else")
         end
       end
 

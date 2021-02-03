@@ -3,7 +3,10 @@ import Config
 config :still,
   view_helpers: [],
   dev_layout: false,
-  url_fingerprinting: false
+  url_fingerprinting: false,
+  preprocessors: %{
+    ".svg" => [AddContent, EEx, OutputPath, Save]
+  }
 
 config :mogrify,
   mogrify_command: [
