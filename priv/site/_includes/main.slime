@@ -2,7 +2,7 @@
   .content
     h1.fancy-title
       .visually-hidden Still
-      .logo
+      .logo.off
         = include("_includes/logo.svg")
     p.lead A composable elixir static site builder
   marquee.marquee

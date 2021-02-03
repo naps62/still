@@ -5,7 +5,7 @@ config :still,
   dev_layout: false,
   url_fingerprinting: false,
   preprocessors: %{
-    ".svg" => [AddContent, EEx, OutputPath, Save]
+    ".svg" => [Still.Preprocessor.AddContent]
   }
 
 config :mogrify,

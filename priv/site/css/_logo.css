@@ -1,0 +1,74 @@
+.logo svg g#logoBackground {
+  animation: logoBgWrapper 5s infinite alternate;
+}
+
+.logo svg g#logoBackground path {
+  animation: flickerText 5s infinite alternate;
+}
+
+.logo svg g#logoText {
+  animation: logoTextWrapper 5s infinite alternate;
+}
+
+.logo svg g#logoText path {
+  animation: flickerText 5s infinite alternate;
+}
+
+.logo svg g#logoUnderline {
+  animation: logoUnderlineWrapper 5s infinite alternate;
+}
+
+.logo svg g#logoUnderline path {
+  animation: flickerUnderline 5s infinite alternate;
+}
+
+@keyframes logoBgWrapper {
+  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+    filter: "url(#filter0_d)"
+  }
+
+  20%, 24%, 55% {
+    filter: none;
+  }
+}
+
+@keyframes logoTextWrapper {
+  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+    filter: "url(#filter1_d)"
+  }
+
+  20%, 24%, 55% {
+    filter: none;
+  }
+}
+
+@keyframes logoUnderlineWrapper {
+  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+    filter: "url(#filter2_d)"
+  }
+
+  20%, 24%, 55% {
+    filter: none;
+  }
+}
+
+@keyframes flickerText {
+  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+    stroke: #fff;
+  }
+
+  20%, 24%, 55% {
+    stroke: #444;
+  }
+}
+
+@keyframes flickerUnderline {
+  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+    stroke: #fff;
+    fill: #fff;
+  }
+
+  20%, 24%, 55% {
+    fill: #444;
+  }
+}
